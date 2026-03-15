@@ -50,8 +50,8 @@ public class Graph {
         iteration = 0;
 
         for (int i = 1; i < vershins; i++) {
-            iteration++;
             for (Edge edge : edges) {
+                iteration++;
                 if (result[edge.from] != (int) 1e8 && result[edge.from] + edge.weight < result[edge.to]) {
                     result[edge.to] = result[edge.from] + edge.weight;
                 }
@@ -59,6 +59,7 @@ public class Graph {
         }
         flagNegativeCycle = false;
         for (Edge edge : edges) {
+            iteration++;
             if (result[edge.from] != (int) 1e8 && (result[edge.from] + edge.weight < result[edge.to])) {
                 flagNegativeCycle = true;
                 break;
@@ -72,26 +73,18 @@ public class Graph {
         Random random = new Random();
         int to;
         int weight;
-        for (int from = 0; from < v; from++) {
+        int from;
+
+        for (int i = 0; i < v * 2; i++) {
             to = random.nextInt(v);
+            from = random.nextInt(v);
             if (from == to) {
                 to--;
             }
-            weight = (to % 2 == 0)  ? random.nextInt(65) + 1: -random.nextInt(5);
+            weight = (to % 2 == 0)  ? random.nextInt(100) + 1: -random.nextInt(100) - 1;
             graph.addEdge(from, to, weight);
         }
 
-        for (int i = 0; i < v / 2; i++) {
-            int from = random.nextInt(v);
-            to = random.nextInt(v);
-
-            if (from == to) {
-                to--;
-            }
-            weight = (from % 2 == 0)  ? random.nextInt(65) + 1 : -random.nextInt(5);
-            graph.addEdge(from, to, weight);
-
-        }
         return graph;
     }
 }

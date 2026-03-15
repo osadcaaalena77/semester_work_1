@@ -14,7 +14,7 @@ public class Main {
 
             for (int v = 100; v <= 10000; v += 150) {
                 Graph graph = Graph.buildGraph(v);
-                 graph.bellmanFord(1);
+                 graph.bellmanFord(0);
 
                  file.write(v + "; " + graph.getTime() + "; " + graph.getIteration() + "; " + graph.getFlagNegativeCycle() + "\n");
             }
